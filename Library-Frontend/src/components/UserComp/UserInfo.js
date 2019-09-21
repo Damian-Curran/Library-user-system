@@ -6,7 +6,8 @@ class UserInfo extends Component{
     constructor(props){
         super(props);
         this.state = {
-            info:""
+            info: {firstName: '', surname: '', email: '', address: '', phone: '', admin: ''},
+            user: JSON.parse(localStorage.getItem('authToken'))
         }
     }
 
@@ -54,8 +55,10 @@ class UserInfo extends Component{
             surname: this.refs.surname.value,
             email: this.refs.email.value,
             address: this.refs.address.value,
-            phone: this.refs.phone.value
+            phone: this.refs.phone.value,
+            admin: this.refs.admin.value
         }
+        console.log(user);
         this.update(user);
     }
 
@@ -68,7 +71,12 @@ class UserInfo extends Component{
             <h2> {this.state.info.email} </h2>
             <h2> {this.state.info.address} </h2>
             <h2> {this.state.info.phone} </h2>
-            <button className="btn" data-toggle="modal" data-target="#exampleModal"> update </button>
+            {(this.state.user.admin === 1) ? (
+                <button className="btn" data-toggle="modal" data-target="#exampleModal"> update </button>
+            ) : (
+                <span />
+            )}
+            
             <button className="btn"> <Link to= {this.props.location.state.routed} style={{color: 'black'}}> Back </Link>  </button>
 
             <div className="modal fade" id="exampleModal" data-backdrop="" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -85,37 +93,48 @@ class UserInfo extends Component{
                         <div className="form-group row">
                             <label className="col-sm-2 col-form-label">First Name</label>
                             <div className="col-sm-10">
-                                <input type="text" className="form-control" name="firstName" placeholder="First Name" ref="firstName" />
+                                <input type="text" className="form-control" name="firstName" placeholder="First Name" ref="firstName" defaultValue={this.state.info.firstName} />
                             </div>
                         </div>
     
                         <div className="form-group row">
                             <label className="col-sm-2 col-form-label">Surname</label>
                             <div className="col-sm-10">
-                                <input type="text" className="form-control" name="surname" placeholder="Surname" ref="surname" />
+                                <input type="text" className="form-control" name="surname" placeholder="Surname" ref="surname" defaultValue={this.state.info.surname}/>
                             </div>
                         </div>
     
                         <div className="form-group row">
                             <label className="col-sm-2 col-form-label">Email</label>
                             <div className="col-sm-10">
-                                <input type="text" className="form-control" name="email" placeholder="Email" ref="email" />
+                                <input type="text" className="form-control" name="email" placeholder="Email" ref="email" defaultValue={this.state.info.email}/>
                             </div>
                         </div>
     
                         <div className="form-group row">
                             <label className="col-sm-2 col-form-label">Address</label>
                             <div className="col-sm-10">
-                                <input type="text" className="form-control" name="address" placeholder="Address" ref="address" />
+                                <input type="text" className="form-control" name="address" placeholder="Address" ref="address" defaultValue={this.state.info.address}/>
                             </div>
                         </div>
     
                         <div className="form-group row">
                             <label className="col-sm-2 col-form-label">Phone</label>
                             <div className="col-sm-10">
-                                <input type="number" className="form-control" name="phone" placeholder="Phone" ref="phone" />
+                                <input type="number" className="form-control" name="phone" placeholder="Phone" ref="phone" defaultValue={this.state.info.phone}/>
                             </div>
                         </div>
+                        {(this.state.user.admin === 1) ? (
+                            <div className="form-group row">
+                            <label className="col-sm-2 col-form-label">Admin</label>
+                            <div className="col-sm-10">
+                                <input type="number" className="form-control" name="admin" placeholder="0 or 1" ref="admin" defaultValue={this.state.info.admin}/>
+                            </div>
+                        </div>
+                        ) : (
+                            <span />
+                        )}
+                        
                     </form>
                         </div>
                         <div className="modal-footer">
