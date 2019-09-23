@@ -66,11 +66,28 @@ class UserInfo extends Component{
         this.update(user);
     }
 
+    updateBook = book => event => {
+        book.taker = -1;
+
+        axios.request({
+            method: 'Put',
+            url: 'http://localhost:8080/book/update',
+            data: book
+        }).then(res => {
+            console.log(book);
+            this.props.history.push('/');
+            this.props.history.push('/user/' + this.state.info.firstName);
+        }).catch(err => console.log(err));
+    }
+
     render(){
         const listItems = this.state.userBooks.map((book) =>
-        <Link to={{pathname: "/book/" + book.name, state:{user: this.state.info.taker, routed: ("/user/" + this.state.info.id)}}}>
-            <li key={book.id}>{book.name}</li> 
-        </Link>
+        <span>
+            <Link to={{pathname: "/book/" + book.name, state:{user: this.state.info.taker, routed: ("/user/" + this.state.info.id)}}}>
+                <li key={book.id}>{book.name}</li>
+            </Link>
+            <button className="btn" onClick= {this.updateBook(book)}> return </button>
+        </span> 
         );
 
         return(
