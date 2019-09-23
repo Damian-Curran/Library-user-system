@@ -3,6 +3,12 @@ import axios from 'axios';
 import { withRouter } from 'react-router';
 
 class AddUser extends Component {
+    constructor(){
+        super();
+        this.state = {
+            error: ""
+        }
+    }
 
     addUser(user){
         axios.request({
@@ -10,7 +16,11 @@ class AddUser extends Component {
             url: 'http://localhost:8080/user/add',
             data: user
         }).then(res => {
-            this.props.history.push('/')
+            if(res.data === "success"){
+                this.props.history.push('/')
+            }else{
+                this.setState({ error: res.data });
+            }
         }).catch(err => console.log(err));
     }
 
@@ -80,6 +90,13 @@ class AddUser extends Component {
                         </div>
                     </div>
                     <input type="submit" value="Add" />
+
+                    <div className="form-group row" >
+                        <label className="col-sm-2 col-form-label" />
+                        <div className="col-sm-10">
+                            <div className="input-feedback">{this.state.error}</div>
+                        </div>
+                    </div>
                 </form>
             </div >
         )

@@ -17,8 +17,16 @@ public class UserController {
 	
 	@CrossOrigin(origins = "http://localhost:3000")
 	@RequestMapping(method = RequestMethod.POST, value = "/user/add")
-	public void add(@RequestBody User u){
-		us.add(u);
+	public String add(@RequestBody User u){
+		if(us.getByEmail((u.getEmail())) == null){
+			us.add(u);
+			
+			return "success";
+		}
+		else{
+			return "An account with this email already exists";
+		}
+		
 	}
 	
 	@CrossOrigin(origins = "http://localhost:3000")
