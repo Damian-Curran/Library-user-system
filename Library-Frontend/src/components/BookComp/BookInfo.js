@@ -81,7 +81,12 @@ class BookInfo extends Component {
                     </span>
                 )
                 : (<span />)}
-                <button className="btn"> <Link to= '/book' style={{color: 'black'}}> Back </Link>  </button>
+                
+                {(this.props.location.state) ? (
+                    <button className="btn"> <Link to= {this.props.location.state.routed} style={{color: 'black'}}> Back </Link>  </button>
+                ) : (
+                    <button className="btn"> <Link to= "/" style={{color: 'black'}}> Back </Link>  </button>
+                )}
 
                 <div className="modal fade" id="exampleModal" data-backdrop="" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div className="modal-dialog" role="document">
