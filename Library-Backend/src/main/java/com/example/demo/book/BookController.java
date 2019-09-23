@@ -1,5 +1,6 @@
 package com.example.demo.book;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,5 +44,14 @@ public class BookController {
 	@RequestMapping(method = RequestMethod.PUT, value = "/book/update")
 	public void update(@RequestBody Book b){
 		bs.update(b);
+	}
+	
+	@CrossOrigin(origins = "http://localhost:3000")
+	@RequestMapping(method = RequestMethod.GET, value = "/book/userBooks/{id}")
+	public List<Book> getUserBooks(@PathVariable int id){
+		List<Book> booksById = new ArrayList<Book>();
+		booksById = bs.getAllByTaker(id);
+		
+		return booksById;
 	}
 }

@@ -7,18 +7,17 @@ class UserInfo extends Component{
         super(props);
         this.state = {
             info: {firstName: '', surname: '', email: '', address: '', phone: '', admin: ''},
-            user: JSON.parse(localStorage.getItem('authToken'))
+            user: JSON.parse(localStorage.getItem('authToken')),
+            userBooks: []
         }
     }
 
     componentDidMount(){
-        this.getInfo();
+        this.getUserInfo();
     }
 
-    getInfo(){
-        let user = JSON.parse(localStorage.getItem('authToken'));
+    getUserInfo(){
         var id;
-        console.log(this.props.location);
         if(this.props.location.state != null){
             if(this.props.location.state.user.id != null){
                 id = this.props.location.state.user.id;
@@ -27,12 +26,18 @@ class UserInfo extends Component{
             }
             
         }else{
-            id = user.id;
+            id = this.state.user.id;
         }
 
         axios.get('http://localhost:8080/user/' + id).then(response => {
             this.setState({ info: response.data }, () => {
                 //console.log(this.props);
+            })
+        })
+
+        axios.get('http://localhost:8080/book/userBooks/' + id).then(response => {
+            this.setState({ userBooks: response.data }, () => {
+                //console.log(response.data);
             })
         })
     }
@@ -58,32 +63,45 @@ class UserInfo extends Component{
             phone: this.refs.phone.value,
             admin: this.refs.admin.value
         }
-        console.log(user);
         this.update(user);
     }
 
     render(){
+        const listItems = this.state.userBooks.map((book) =>
+        <Link to={{pathname: "/book/" + book.name, state:{user: this.state.info.taker, routed: ("/user/" + this.state.info.id)}}}>
+            <li key={book.id}>{book.name}</li> 
+        </Link>
+        );
+
         return(
-            <div>
+            <div className="">
             <h1> Info </h1>
             <h2> {this.state.info.firstName} </h2>
             <h2> {this.state.info.surname} </h2>
             <h2> {this.state.info.email} </h2>
             <h2> {this.state.info.address} </h2>
             <h2> {this.state.info.phone} </h2>
+
+            {listItems}
+
             {(this.state.user.admin === 1) ? (
                 <button className="btn" data-toggle="modal" data-target="#exampleModal"> update </button>
             ) : (
                 <span />
             )}
             
-            <button className="btn"> <Link to= {this.props.location.state.routed} style={{color: 'black'}}> Back </Link>  </button>
+            {(this.props.location.state) ? (
+                <button className="btn"> <Link to= {this.props.location.state.routed} style={{color: 'black'}}> Back </Link>  </button>
+            ) : (
+                <button className="btn"> <Link to= "/" style={{color: 'black'}}> Back </Link>  </button>
+            )}
+            
 
             <div className="modal fade" id="exampleModal" data-backdrop="" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div className="modal-dialog" role="document">
                     <div className="modal-content">
                         <div className="modal-header">
-                            <h5 className="modal-title" id="exampleModalLabel">Modal title</h5>
+                            <h5 className="modal-title" id="exampleModalLabel">User info</h5>
                             <button type="button" className="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>

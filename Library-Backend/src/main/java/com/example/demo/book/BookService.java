@@ -33,4 +33,11 @@ public class BookService {
 		
 		return allBooks;
 	}
+	
+	public List<Book> getAllByTaker(int taker){
+		List<Book> allBooks = new ArrayList<Book>();
+		allBooks = br.findAllByTaker(taker);
+		
+		return allBooks;
+	}
 }
