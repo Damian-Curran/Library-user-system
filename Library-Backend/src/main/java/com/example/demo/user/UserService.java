@@ -24,7 +24,7 @@ public class UserService {
 	}
 	
 	public void delete(long id){
-		ur.deleteById(id);;
+		ur.deleteById(id);
 	}
 	
 	public void update(User u){
