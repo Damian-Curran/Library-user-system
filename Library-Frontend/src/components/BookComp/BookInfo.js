@@ -67,12 +67,15 @@ class BookInfo extends Component {
                 <h2> {this.state.info.description} </h2>
                 {(this.state.user.admin === 1) ? ( 
                     <span>
-                        <Link to={{pathname: "/user/" + this.state.info.taker, state:{user: this.state.info.taker, routed: ("/book/" + this.state.info.name)}}}>
+                        {(this.state.info.taker != -1) ? (
+                            <Link to={{pathname: "/user/" + this.state.info.taker, state:{user: this.state.info.taker, routed: ("/book/" + this.state.info.name)}}}>
                             <h2>{this.state.info.taker}</h2>
                         </Link>
+                        ) : (<span />)}
+                
                         <button className="btn" data-toggle="modal" data-target="#exampleModal"> update </button>
                         <button className="btn" onClick= {this.onDelete.bind(this)}> delete </button> 
-                        {(!this.state.info.taker) ? (
+                        {(this.state.info.taker === -1) ? (
                             <button className="btn" onClick= {this.takeBook.bind(this)}> take out </button> 
                         ): (
                             <span />

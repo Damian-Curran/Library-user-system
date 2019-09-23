@@ -10,7 +10,7 @@ public class Book {
 	@GeneratedValue
 	private long id;
 	private String name, author, description;
-	private int taker;
+	private int taker = -1;
 	
 	public Book(String name, String author, String description, int taker) {
 		super();

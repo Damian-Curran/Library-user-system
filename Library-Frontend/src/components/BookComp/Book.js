@@ -44,7 +44,7 @@ class Book extends Component{
                 <div>
                     {(this.state.show === false) ? (
                         <div>
-                            {(!book.taker) ? (
+                            {(book.taker === -1) ? (
                                 <BookItem key = {book.id} item = {book}/>
                             ) : (
                                 <span />
@@ -52,7 +52,7 @@ class Book extends Component{
                         </div>
                     ) : (
                         <div>
-                            {(book.taker) ? (
+                            {(book.taker >= 0) ? (
                                 <BookItem key = {book.id} item = {book}/>
                             ) : (
                                 <span />
