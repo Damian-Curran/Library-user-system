@@ -18,10 +18,15 @@ public class UserController {
 	@CrossOrigin(origins = "http://localhost:3000")
 	@RequestMapping(method = RequestMethod.POST, value = "/user/add")
 	public String add(@RequestBody User u){
+		String emailRegex = "^[\\w-_\\.+]*[\\w-_\\.]\\@([\\w]+\\.)+[\\w]+[\\w]$";
 		if(us.getByEmail((u.getEmail())) == null){
-			us.add(u);
-			
-			return "success";
+			if((u.getEmail()).matches(emailRegex)){
+				us.add(u);
+				
+				return "success";
+			}else{
+				return "Email format entered is incorrect";
+			}
 		}
 		else{
 			return "An account with this email already exists";
