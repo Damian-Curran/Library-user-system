@@ -62,10 +62,10 @@ class BookInfo extends Component {
     render() {
         return (
             <div>
-                <h1> Info </h1>
+                <h1> {this.state.info.name} </h1>
                 <h2> {this.state.info.author} </h2>
                 <h2> {this.state.info.description} </h2>
-                {(this.state.user.admin === 1) ? ( 
+                {(this.state.user && this.state.user.admin === 1) ? ( 
                     <span>
                         {(this.state.info.taker != -1) ? (
                             <Link to={{pathname: "/user/" + this.state.info.taker, state:{user: this.state.info.taker, routed: ("/book/" + this.state.info.name)}}}>

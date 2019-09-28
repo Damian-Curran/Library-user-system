@@ -66,7 +66,7 @@ class Book extends Component{
         return(
             <div>
                 <h1>book js</h1>
-                {(this.state.user.admin === 1) ? (
+                {(this.state.user && this.state.user.admin === 1) ? (
                     <div>
                         {(this.state.show === false) ? (
                             <button onClick= {(this.showTaken.bind(this))} > Show taken out books </button>
