@@ -15,8 +15,9 @@ class Login extends Component {
         axios.get('http://localhost:8080/user/profile/' + email).then(response=>{
             var user = response.data;
             localStorage.setItem('authToken', JSON.stringify(user));
+            this.props.history.push('/');
         })
-    } 
+    }
 
     checkUser(user) {
         axios.request({
@@ -25,11 +26,7 @@ class Login extends Component {
             data: user
         }).then(res => {
             if(res.data === "Success"){
-                localStorage.setItem('authToken', JSON.stringify(user));
-
                 this.getUser(user.email);
-
-                this.props.history.push('/');
             }
             else{
                 this.setState({ error: res.data });
@@ -42,9 +39,9 @@ class Login extends Component {
             email: this.refs.Email.value,
             password: this.refs.Password.value,
         }
-        this.checkUser(user);
-
         event.preventDefault();
+
+        this.checkUser(user);
     }
 
     render() {
