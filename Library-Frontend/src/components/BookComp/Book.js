@@ -41,7 +41,7 @@ class Book extends Component{
     render(){
         var bookItem = this.state.books.map((book, i)=>{
             return(
-                <div>
+                <div key={i}>
                     {(this.state.show === false) ? (
                         <div>
                             {(book.taker === -1) ? (
@@ -77,8 +77,6 @@ class Book extends Component{
                 ) : (
                     <span />
                 )}
-                <ul>
-                    {bookItem}
                 </ul>
             </div>
         )
