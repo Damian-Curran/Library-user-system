@@ -25,8 +25,8 @@ class BookItem extends Component{
                     {this.state.item.name}
                 </Link>
                 {(this.state.user && this.state.user.admin === 1) ? ( 
-                <span className="badge left">
-                    <button className="btn btn-primary fa fa-minus" onClick={this.onDelete.bind(this)} />
+                <span className="badge-right float-right">
+                    <button className="btn btn-primary fa fa-close" onClick={this.onDelete.bind(this)} />
                 </span> ) : (<span />)}
             </li>
         )

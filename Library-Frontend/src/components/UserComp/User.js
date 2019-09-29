@@ -31,7 +31,7 @@ class User extends Component{
             return(
                 <div>
                     <h1> user js </h1>
-                    <ul>
+                    <ul className="list-group">
                         {userItem}
                     </ul>
                 </div>

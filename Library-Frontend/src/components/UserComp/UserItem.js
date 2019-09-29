@@ -23,7 +23,7 @@ class UserItem extends Component{
                 <Link to= {{pathname: "/user/" + this.state.item.firstName, state:{user : this.state.item, routed: "/user"}}}>
                     {this.state.item.firstName}
                 </Link>
-                <span className="badge left">
+                <span className="badge left float-right">
                     <button className="btn btn-primary fa fa-minus" onClick={this.onDelete.bind(this)} />
                 </span>
             </li>

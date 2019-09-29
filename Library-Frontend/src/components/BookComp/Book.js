@@ -77,6 +77,8 @@ class Book extends Component{
                 ) : (
                     <span />
                 )}
+                <ul className="list-group">
+                        {bookItem}
                 </ul>
             </div>
         )

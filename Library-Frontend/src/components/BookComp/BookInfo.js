@@ -73,10 +73,10 @@ class BookInfo extends Component {
                         </Link>
                         ) : (<span />)}
                 
-                        <button className="btn" data-toggle="modal" data-target="#exampleModal"> update </button>
-                        <button className="btn" onClick= {this.onDelete.bind(this)}> delete </button> 
+                        <button className="btn btn-primary" data-toggle="modal" data-target="#exampleModal"> update </button>
+                        <button className="btn btn-primary" onClick= {this.onDelete.bind(this)}> delete </button> 
                         {(this.state.info.taker === -1) ? (
-                            <button className="btn" onClick= {this.takeBook.bind(this)}> take out </button> 
+                            <button className="btn btn-primary" onClick= {this.takeBook.bind(this)}> take out </button> 
                         ): (
                             <span />
                         )}
@@ -86,9 +86,9 @@ class BookInfo extends Component {
                 : (<span />)}
                 
                 {(this.props.location.state) ? (
-                    <button className="btn"> <Link to= {this.props.location.state.routed} style={{color: 'black'}}> Back </Link>  </button>
+                    <button className="btn btn-primary"> <Link to= {this.props.location.state.routed} style={{color: 'black'}}> Back </Link>  </button>
                 ) : (
-                    <button className="btn"> <Link to= "/" style={{color: 'black'}}> Back </Link>  </button>
+                    <button className="btn btn-primary"> <Link to= "/" style={{color: 'black'}}> Back </Link>  </button>
                 )}
 
                 <div className="modal fade" id="exampleModal" data-backdrop="" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
