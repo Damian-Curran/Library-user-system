@@ -30,7 +30,7 @@ const Main = ()=>(
                 <Route exact path="/book/:id" component={BookInfo}/>
 
                 <PrivateRoute exact path="/user" component={User}/>
-                <PrivateRoute exact path="/addUser" component={AddUser}/>
+                <Route exact path="/addUser" component={AddUser}/>
                 <UserRoute exact path="/user/:id" component={UserInfo}/>
 
                 <Route exact path="/Login" component={Login}/>
